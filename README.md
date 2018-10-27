@@ -1,4 +1,4 @@
-# Montoux needs static type checking and type annotations
+# [Montoux needs static type checking and type annotations](https://types-for-montoux.netlify.com/)
 
 ## Introduction
 
