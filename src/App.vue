@@ -16,7 +16,7 @@
                 </h2>
               </v-card-title>
               <v-card-text>
-                <Counter :all-bugs="allBugs" :type-bugs="typeBugs" />
+                <Counter />
               </v-card-text>
             </v-card>
           </v-flex>
@@ -28,7 +28,7 @@
                 </h2>
               </v-card-title>
               <v-card-text>
-                <Form @bug-encountered="bugEncountered" />
+                <Form />
               </v-card-text>
             </v-card>
           </v-flex>
@@ -40,28 +40,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 import Counter from './components/Counter.vue';
 import Form from './components/Form.vue';
+
 
 export default Vue.extend({
   name: 'App',
   components: {
     Counter,
     Form,
-  },
-  data() {
-    return {
-      typeBugs: 0,
-      allBugs: 0,
-    };
-  },
-  methods: {
-    bugEncountered(isTypeBug: boolean) {
-      this.allBugs += 1;
-      if (isTypeBug) {
-        this.typeBugs += 1;
-      }
-    },
   },
 });
 </script>

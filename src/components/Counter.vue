@@ -41,25 +41,25 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
+import { mapState, mapGetters } from 'vuex';
 import * as d3 from 'd3';
 
 interface Datum {
-  readonly label: string,
-  readonly count: number,
+  readonly label: string;
+  readonly count: number;
 }
 
-export default Vue.extend({
+// Explicit bindings while waiting for https://github.com/vuejs/vuex/pull/1121
+interface VuexBindings {
+  readonly typeBugs: number;
+  readonly otherBugs: number;
+  readonly allBugs: number;
+}
+
+export default (Vue as VueConstructor<Vue & VuexBindings>).extend({
   name: 'Counter',
   props: {
-    allBugs: {
-      type: Number,
-      required: true,
-    },
-    typeBugs: {
-      type: Number,
-      required: true,
-    },
     width: {
       type: Number,
       default: 500,
@@ -70,10 +70,17 @@ export default Vue.extend({
     },
   },
   computed: {
+    ...mapState([
+      'typeBugs',
+      'otherBugs',
+    ]),
+    ...mapGetters([
+      'allBugs',
+    ]),
     pieData(): Array<d3.PieArcDatum<Datum>> {
       const dataset: Datum[] = [
         { label: 'Type bugs', count: this.typeBugs },
-        { label: 'Other bugs', count: this.allBugs - this.typeBugs },
+        { label: 'Other bugs', count: this.otherBugs },
       ];
       const pie = d3.pie<Datum>()
         .value(d => d.count)
