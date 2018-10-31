@@ -95,6 +95,9 @@ export default (Vue as VueConstructor<Vue & VuexBindings>).extend({
         .outerRadius(radius);
     },
   },
+  mounted() {
+    this.$store.dispatch('fetchBugs');
+  },
   methods: {
     color(datum: d3.PieArcDatum<Datum>): string {
       const color = d3.scaleOrdinal<string>()

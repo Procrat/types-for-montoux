@@ -1,9 +1,9 @@
 <template>
   <v-layout id="form" column align-center>
-    <v-btn @click="newTypeBug">
+    <v-btn @click="newBug(true)">
       Yes, and it wouldn't have happened if we had types!
     </v-btn>
-    <v-btn @click="newOtherBug">
+    <v-btn @click="newBug(false)">
       Yes! But types wouldn't have helped.
     </v-btn>
     <v-btn disabled>No. (coming soon)</v-btn>
@@ -18,8 +18,7 @@ export default Vue.extend({
   name: 'Form',
   methods: {
     ...mapActions([
-      'newTypeBug',
-      'newOtherBug',
+      'newBug',
     ]),
   },
 });
